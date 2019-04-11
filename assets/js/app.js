@@ -16,15 +16,15 @@ $("#add-btn").on("click", function (event) {
 
     var trainName = $("#train-input").val().trim();
     var destination = $("#destination-input").val().trim();
-    var trainStart = moment($("#start-input").val().trim());
-    var frequncy = $("#freq-input").val().trim();
+    var trainStart = moment($("#start-input").val().trim(), "HH:mm").format("HH:mm");
+    var frequency = $("#freq-input").val().trim();
 
 
     var newTrain = {
         name: trainName,
         destination: destination,
         start: trainStart,
-        frequncy: frequncy
+        frequency: frequency
     };
 
 
@@ -42,7 +42,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var trainName = childSnapshot.val().name;
     var destination = childSnapshot.val().destination;
     var trainStart = childSnapshot.val().start;
-    var frequncy = childSnapshot.val().frequncy;
+    var frequency = childSnapshot.val().frequency;
 
     var firstTimeConverted = moment(trainStart, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
@@ -65,7 +65,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        $("<td>").text(frequncy),
+        $("<td>").text(frequency),
         $("<td>").text(nextTrain),
         $("<td>").text(tMinutesTillTrain),
     );

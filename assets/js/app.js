@@ -59,7 +59,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var tMinutesTillTrain = frequency - tRemainder;
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
     var newRow = $("<tr>").append(
